@@ -4,8 +4,8 @@
 # explicitly define which files are copied
 !src/
 !index.ts
-!jsconfig.json
 !tsconfig.json
+!tsconfig.build.json
 !package.json
-!package-lock.lock
+!package-lock.json
 !ecosystem.config.js
