@@ -13,7 +13,7 @@
     "prebuild": "gts clean",
     "postbuild": "tsc-alias",
     "gcloud:build": "gcloud builds submit --tag gcr.io/dworks-diegoa/ts-node-api",
-    "gcloud:deploy": "gcloud run deploy ts-node-api --image gcr.io/dworks-diegoa/ts-node-api --platform managed --region europe-west4 --allow-unauthenticated",
+    "gcloud:deploy": "gcloud run deploy ts-node-api --image gcr.io/dworks-diegoa/ts-node-api --platform managed --region europe-west4 --allow-unauthenticated --service-account ts-node-api@dworks-diegoa.iam.gserviceaccount.com --update-secrets SENTRY_ORG=SENTRY_ORG:latest,SENTRY_PROJECT=SENTRY_PROJECT:latest,SENTRY_AUTH_TOKEN=SENTRY_AUTH_TOKEN:latest,SENTRY_DSN=SENTRY_DSN:latest",
     "docker:build": "docker build -t ts-node-api .",
     "docker:start": "docker run -p 3000:3000 -it ts-node-api",
     "docker:clean": "docker stop $(docker ps -q) && docker image rm $(docker image ls -q) --force",
@@ -39,7 +39,6 @@
     "tsc-alias": "^1.8.10",
     "tsx": "^4.19.0",
     "typescript": "^5.6.2",
-    "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
   },
   "dependencies": {

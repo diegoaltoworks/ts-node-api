@@ -18,8 +18,7 @@ RUN rm -rf node_modules && npm i --production --ignore-scripts
 # ---
 FROM gcr.io/distroless/nodejs22-debian12 AS production-environment
 
-USER nonroot
-COPY --chown=node --from=build-environment /opt/app /opt/app
+COPY --from=build-environment /opt/app /opt/app
 WORKDIR /opt/app
 
 ARG NODE_ENV=production

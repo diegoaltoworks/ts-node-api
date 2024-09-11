@@ -20,8 +20,8 @@ module.exports = {
       name: 'prod',
       script: 'dist/index.js',
       interpreter: 'node',
-      //exec_mode: 'cluster', // Not suitable for cloud envs
-      //instances: 9, // Use maximum number of possible instances
+      //exec_mode: 'cluster', // not suitable for cloud envs
+      //instances: 9, // set maximum number of possible instances
       env: {
         NODE_ENV: 'production',
       },
