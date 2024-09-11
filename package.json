@@ -1,0 +1,60 @@
+{
+  "name": "ts-node-api",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "stop": "pm2 stop all",
+    "dev": "dotenvx run -- pm2-runtime start ecosystem.config.js --only dev",
+    "start": "dotenvx run -- pm2-runtime start ecosystem.config.js --only prod",
+    "raw:dev": "NODE_ENV=development dotenvx run -- tsx ./src",
+    "raw:start": "NODE_ENV=production dotenvx run -- node ./dist",
+    "clean": "gts clean",
+    "build": "tsc -p tsconfig.build.json",
+    "prebuild": "gts clean",
+    "postbuild": "tsc-alias",
+    "gcloud:build": "gcloud builds submit --tag gcr.io/dworks-diegoa/ts-node-api",
+    "gcloud:deploy": "gcloud run deploy ts-node-api --image gcr.io/dworks-diegoa/ts-node-api --platform managed --region europe-west4 --allow-unauthenticated",
+    "docker:build": "docker build -t ts-node-api .",
+    "docker:start": "docker run -p 3000:3000 -it ts-node-api",
+    "docker:clean": "docker stop $(docker ps -q) && docker image rm $(docker image ls -q) --force",
+    "tidy": "npm run lint && npm run fix",
+    "lint": "gts lint",
+    "fix": "gts fix",
+    "test": "vitest",
+    "ignore-prepare": "npm run build",
+    "ignore-pretest": "npm run build",
+    "posttest": "npm run lint"
+  },
+  "author": "diegoaltoworks",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.4",
+    "@types/supertest": "^6.0.2",
+    "eslint-plugin-vitest": "^0.5.4",
+    "gts": "^5.3.1",
+    "husky": "^9.1.5",
+    "supertest": "^7.0.0",
+    "tsc-alias": "^1.8.10",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.2",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.14.0",
+    "@sentry/node": "^8.29.0",
+    "@sentry/profiling-node": "^8.29.0",
+    "envalid": "^8.0.0",
+    "express": "^4.20.0",
+    "express-async-errors": "^3.1.1",
+    "newrelic": "^12.3.1",
+    "pm2": "^5.4.2",
+    "winston": "^3.14.2",
+    "winston-transport-sentry-node": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

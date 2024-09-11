@@ -1,0 +1,11 @@
+# explicitly ignore all files and folders
+*
+
+# explicitly define which files are copied
+!src/
+!index.ts
+!jsconfig.json
+!tsconfig.json
+!package.json
+!package-lock.lock
+!ecosystem.config.js

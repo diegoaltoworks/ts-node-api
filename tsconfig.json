@@ -1,0 +1,18 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "types": ["node", "vitest", "vitest/globals"],
+    "esModuleInterop": true,
+
+    "baseUrl": "./",
+    "rootDir": ".",
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["src/*"],
+      "rollup/parseAst": ["./node_modules/rollup/dist/parseAst"]
+    }
+  },
+  "include": ["index.ts", "src/**/*.ts", "tests/**/*.ts"],
+  "ignore": ["node_modules", "dist"]
+}
