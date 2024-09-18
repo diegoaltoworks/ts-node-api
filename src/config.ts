@@ -1,5 +1,9 @@
 import {cleanEnv, str, num} from 'envalid';
-const PackageJson = require('../package.json');
+import * as path from 'path';
+import * as fs from 'fs';
+
+const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+const PackageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
 // Define your environment variables and their types
 const env = cleanEnv(process.env, {
