@@ -3,6 +3,7 @@ name: Deploy
 on:
   workflow_run:
     workflows: ['Build']
+    types: ['completed']
 
 jobs:
   build-failed:
