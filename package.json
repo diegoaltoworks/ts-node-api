@@ -17,7 +17,7 @@
     "lint": "gts lint",
     "fix": "gts fix",
     "prepare": "husky",
-    "predocs": "NODE_ENV=development dotenvx run -- tsx ./docs/generator.ts",
+    "predocs": "NODE_ENV=production dotenvx run -- tsx ./docs/generator.ts",
     "docs": "openapi-to-md -s ./docs/openapi.json ./docs/README.md",
     "test": "dotenvx run -- vitest --run",
     "test:watch": "dotenvx run -- vitest",
