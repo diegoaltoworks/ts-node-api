@@ -45,8 +45,14 @@ jobs:
     steps:
       - run: echo 'Tests completed successfully.'
 
+  direct-push:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/heads/main')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Pushed direcly to main'
+
   build:
-    needs: tests-passed
+    needs: ['tests-passed', 'direct-push']
     runs-on: ubuntu-latest
 
     steps:
