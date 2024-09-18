@@ -12,6 +12,7 @@ name: Build
 on:
   workflow_run:
     workflows: ['Test']
+    types: ['completed']
 
 env:
   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
