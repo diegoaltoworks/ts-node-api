@@ -1,7 +1,10 @@
 import {cleanEnv, str, num} from 'envalid';
+const PackageJson = require('../package.json');
 
 // Define your environment variables and their types
 const env = cleanEnv(process.env, {
+  PROJECT_NAME: str({default: PackageJson.name}),
+  PROJECT_VERSION: str({default: PackageJson.version}),
   NODE_ENV: str({
     devDefault: 'development',
     choices: ['development', 'test', 'production', 'staging'],
@@ -12,7 +15,7 @@ const env = cleanEnv(process.env, {
   SENTRY_DSN: str({default: ''}),
   PORT: num({default: 3000}),
   APIKEY: str({default: ''}),
-  BASEURL: str({default: ''}),
+  PROJECT_URL: str({default: ''}),
   JWT_SECRET: str({default: '', devDefault: 'super-secret-goes-here'}),
   JWT_TEST_TOKEN: str({
     default: '',
@@ -25,8 +28,8 @@ const env = cleanEnv(process.env, {
   }),
 });
 
-// Define BASEURL with a dynamic default that refers to the validated PORT
-const BASEURL = env.BASEURL || `http://localhost:${env.PORT}`;
+// Define PROJECT_URL with a dynamic default that refers to the validated PORT
+const PROJECT_URL = env.PROJECT_URL || `http://localhost:${env.PORT}`;
 
 // Export the validated environment variables
 export const config = {
@@ -34,7 +37,7 @@ export const config = {
   ...env,
 
   // add base url with dynamic default from given port number
-  BASEURL,
+  PROJECT_URL,
 
   // rename any if you like
   apiKey: env.APIKEY,

@@ -1,6 +1,6 @@
 {
   "name": "ts-node-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "scripts": {
     "stop": "pm2 stop all",
@@ -15,6 +15,10 @@
     "tidy": "npm run lint && npm run fix",
     "lint": "gts lint",
     "fix": "gts fix",
+    "prepare": "husky",
+    "predocs": "NODE_ENV=development dotenvx run -- tsx ./docs/generator.ts",
+    "postdocs": "rm -rf openapi.json",
+    "docs": "openapi-to-md -s openapi.json DOCS.md",
     "test": "dotenvx run -- vitest --run",
     "test:watch": "dotenvx run -- vitest",
     "ignore-prepare": "npm run build",
@@ -34,6 +38,7 @@
     "gts": "^5.3.1",
     "husky": "^9.1.5",
     "msw-trpc": "^2.0.0-beta.1",
+    "openapi-to-md": "^1.0.24",
     "supertest": "^7.0.0",
     "tsc-alias": "^1.8.10",
     "tsx": "^4.19.0",
@@ -43,6 +48,7 @@
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.14.0",
+    "@scalar/express-api-reference": "^0.4.150",
     "@sentry/node": "^8.29.0",
     "@sentry/profiling-node": "^8.29.0",
     "@trpc/client": "^10.45.2",
