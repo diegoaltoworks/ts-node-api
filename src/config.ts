@@ -7,8 +7,9 @@ const PackageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
 // Define your environment variables and their types
 const env = cleanEnv(process.env, {
-  PROJECT_NAME: str({default: PackageJson.name}),
   PROJECT_VERSION: str({default: PackageJson.version}),
+  PROJECT_NAME: str({default: PackageJson.name}),
+  PROJECT_URL: str({default: PackageJson.homepage}),
   NODE_ENV: str({
     devDefault: 'development',
     choices: ['development', 'test', 'production', 'staging'],
@@ -19,7 +20,6 @@ const env = cleanEnv(process.env, {
   SENTRY_DSN: str({default: ''}),
   PORT: num({default: 3000}),
   APIKEY: str({default: ''}),
-  PROJECT_URL: str({default: PackageJson.homepage}),
   JWT_SECRET: str({default: '', devDefault: 'super-secret-goes-here'}),
   JWT_TEST_TOKEN: str({
     default: '',
