@@ -1,0 +1,80 @@
+name: Build
+
+# to build locally with gh-act
+#
+#   > using a github token to pull from remote
+#     act -j build -s GITHUB_TOKEN="$(gh auth token)"
+#
+#   > using filed in the current directory
+#     act -j build -s ACT=true -b -v $(pwd):/github/workspace
+#
+
+on:
+  workflow_run:
+    workflows: ['Test']
+
+env:
+  SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+  SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+  SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  JWT_TEST_TOKEN: ${{ secrets.JWT_TEST_TOKEN }}
+
+jobs:
+  tests-failed:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'Tests failed.'
+
+  abort-build:
+    needs: tests-failed
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "*** TESTS FAILED - ABORT ***"
+          exit 1
+
+  tests-passed:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo 'Tests completed successfully.'
+
+  build:
+    needs: tests-passed
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Detect runs inside ACT cntainer
+        if: env.ACT == 'true' # Only run this check in act container
+        run: |
+          echo "*** ACT DETECTED *** remember to mount local files with -b -v $(pwd):/github/workspace"
+
+      - name: Verify github.token
+        if: env.ACT != 'true' # Only run this check on GitHub Actions
+        run: |
+          if [ -z "${{ github.token }}" ]; then
+            echo "Error: github.token is not set. Please set the token in your repository secrets."
+            exit 1
+          fi
+
+      - name: Checkout code
+        if: env.ACT != 'true' # Only checkout code when not running locally with `act`
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ github.token }}
+          fetch-depth: 0 # Optionally fetch all history for the repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests unit and integration tests
+        run: npm build

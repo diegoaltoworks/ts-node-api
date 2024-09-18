@@ -12,16 +12,29 @@ const env = cleanEnv(process.env, {
   SENTRY_DSN: str({default: ''}),
   PORT: num({default: 3000}),
   APIKEY: str({default: ''}),
+  BASEURL: str({default: ''}),
+  JWT_SECRET: str({default: '', devDefault: 'super-secret-goes-here'}),
+  JWT_TEST_TOKEN: str({
+    default: '',
+    devDefault:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjYiLCJuYW1lIjoiVXNlciIsImlhdCI6MTUxNjIzOTAyMn0.lLQY2Zv1ww8GwvC-UTVpRKlevFuZEXBL6anBgMGHfJE',
+  }),
   DATABASE_URL: str({
     default: '',
     devDefault: 'mongodb://localhost:27017/myapp',
   }),
 });
 
+// Define BASEURL with a dynamic default that refers to the validated PORT
+const BASEURL = env.BASEURL || `http://localhost:${env.PORT}`;
+
 // Export the validated environment variables
 export const config = {
   // return them all with the same names
   ...env,
+
+  // add base url with dynamic default from given port number
+  BASEURL,
 
   // rename any if you like
   apiKey: env.APIKEY,
