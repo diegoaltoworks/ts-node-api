@@ -1,4 +1,4 @@
-import appRouter from './appRouter';
+import appRouter from '@/trpc/appRouter';
 import {createContext} from '@/trpc/context';
 import {createExpressMiddleware} from '@trpc/server/adapters/express';
 

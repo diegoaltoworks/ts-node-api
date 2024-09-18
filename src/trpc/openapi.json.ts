@@ -4,9 +4,9 @@ import {Router} from 'express';
 import config from '@/config';
 
 export const openApiDocument = generateOpenApiDocument(appRouter, {
-  title: 'tRPC OpenAPI',
-  version: '1.0.0',
-  baseUrl: `${config.BASEURL}`,
+  title: config.PROJECT_NAME,
+  version: config.PROJECT_VERSION,
+  baseUrl: `${config.PROJECT_URL}/api`,
 });
 
 const router = Router();
