@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://ts-node-api-3s3qtcl6ra-ez.a.run.app/api"
+      "url": "https://ts-node-api.diegoalto.app/api"
     }
   ],
   "paths": {
