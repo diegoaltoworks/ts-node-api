@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import type {Express} from 'express';
 //import 'express-async-errors'; // not needed
 import {expressErrorHandler} from '@/lib/errorHandlers';
@@ -11,25 +12,27 @@ import sampleRouter from '@/sample';
 import contentRouter from '@/content';
 
 const app: Express = express();
+app.use(cors());
 
-// add routes here
+// ---
+// add custom routes here
 //
 //
 // ---
 
-// trpc api routes
+// tRPC procedure routes
 app.use('/trpc', trpcRestApiExpressRouter);
 
-// trpc REST routes (with trpc-openapi)
+// tRPC REST routes (with trpc-openapi)
 app.use('/api', trpcOpenApiRouter);
 
 // openapi docs
 app.use('/docs', docsRouter);
 
-// trpc panel
+// tRPC panel
 app.use('/panel', trpcPanelRouter);
 
-// trpc REST routes (with trpc-openapi)
+// tRPC REST routes (with trpc-openapi)
 app.use(trpcOpenApiJson);
 
 // sample routes

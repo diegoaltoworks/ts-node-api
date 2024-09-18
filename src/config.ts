@@ -33,7 +33,10 @@ const env = cleanEnv(process.env, {
 });
 
 // Define PROJECT_URL with a dynamic default that refers to the validated PORT
-const PROJECT_URL = env.PROJECT_URL || `http://localhost:${env.PORT}`;
+const PROJECT_URL =
+  env.NODE_ENV === 'development'
+    ? `http://localhost:${env.PORT}`
+    : env.PROJECT_URL || `http://localhost:${env.PORT}`;
 
 // Export the validated environment variables
 export const config = {

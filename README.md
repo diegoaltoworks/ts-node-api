@@ -1,6 +1,6 @@
 # ts-node-api
 
-Yet another ts boilerplate.
+Yet another ts boilerplate. With `tRPC` and `openapi.json` auto generated docs.
 
 My aim was to create something,
 
