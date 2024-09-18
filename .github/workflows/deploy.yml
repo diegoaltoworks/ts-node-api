@@ -5,7 +5,28 @@ on:
     workflows: ['Build']
 
 jobs:
-  deploy-production:
+  build-failed:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'Build failed.'
+
+  abort-build:
+    needs: build-failed
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "*** BUILD FAILED - ABORT ***"
+          exit 1
+
+  build-completed:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo 'Build completed successfully.'
+
+  deploy:
+    needs: build-completed
     runs-on: ubuntu-latest
 
     steps:
