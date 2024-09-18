@@ -12,6 +12,9 @@ name: Test
 on:
   pull_request:
     types: [opened, reopened, synchronize]
+  push:
+    branches:
+      - main
 
 env:
   SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
