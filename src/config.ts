@@ -13,8 +13,9 @@ const env = cleanEnv(process.env, {
   PORT: num({default: 3000}),
   APIKEY: str({default: ''}),
   BASEURL: str({default: ''}),
-  JWT_SECRET: str({devDefault: 'super-secret-goes-here'}),
+  JWT_SECRET: str({default: '', devDefault: 'super-secret-goes-here'}),
   JWT_TEST_TOKEN: str({
+    default: '',
     devDefault:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjYiLCJuYW1lIjoiVXNlciIsImlhdCI6MTUxNjIzOTAyMn0.lLQY2Zv1ww8GwvC-UTVpRKlevFuZEXBL6anBgMGHfJE',
   }),

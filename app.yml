@@ -1,0 +1,10 @@
+runtime: nodejs22
+
+instance_class: F1
+
+env_variables:
+  NODE_ENV: 'production'
+
+resources:
+  cpu: 1
+  memory_gb: 0.6

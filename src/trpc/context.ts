@@ -1,12 +1,14 @@
 import config from '@/config';
+import logger from '@/lib/logger';
 import {TRPCError} from '@trpc/server';
 import {CreateExpressContextOptions} from '@trpc/server/adapters/express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = config.JWT_SECRET;
-if (!JWT_SECRET) {
-  throw new Error('JWT_SECRET is not set');
+if (!config.JWT_SECRET) {
+  logger.warn('JWT_SECRET is not set, using random string for testing');
+  //OPTIONAL: throw new Error('JWT_SECRET is not set');
 }
+const JWT_SECRET = config.JWT_SECRET || new Date().getTime().toString();
 
 //TODO: replace with necessary checks
 export type User = {id: string; name: string};

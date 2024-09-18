@@ -1,6 +1,6 @@
 # Builder
 # ---
-FROM node:20 AS build-environment
+FROM node:22 AS build-environment
 WORKDIR /opt/app
 
 COPY package*.json ./
@@ -25,4 +25,6 @@ ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
 ENV PATH=/opt/node_app/node_modules/.bin:$PATH
 
+#ENTRYPOINT ["node","dist/index.js"]
+# distroless start command:
 CMD ["dist/index.js"]
