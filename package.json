@@ -17,7 +17,6 @@
     "fix": "gts fix",
     "prepare": "husky",
     "predocs": "NODE_ENV=development dotenvx run -- tsx ./docs/generator.ts",
-    "postdocs": "rm -rf openapi.json",
     "docs": "openapi-to-md -s openapi.json DOCS.md",
     "test": "dotenvx run -- vitest --run",
     "test:watch": "dotenvx run -- vitest",
