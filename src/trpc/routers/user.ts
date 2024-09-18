@@ -12,7 +12,7 @@ export const user = router({
         message: z.string().optional(),
       })
     )
-    .query(async opts => {
-      return {message: `Hello user!`};
+    .query(async () => {
+      return {message: 'Hello user!'};
     }),
 });

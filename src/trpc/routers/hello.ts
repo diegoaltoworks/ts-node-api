@@ -12,8 +12,8 @@ export const hello = router({
         message: z.string().optional(),
       })
     )
-    .query(async opts => {
-      return {message: `Hello world!`};
+    .query(async () => {
+      return {message: 'Hello world!'};
     }),
   world: publicProcedure
     .meta({
@@ -25,8 +25,8 @@ export const hello = router({
         message: z.string().optional(),
       })
     )
-    .query(async opts => {
-      return {message: `Hello world!`};
+    .query(async () => {
+      return {message: 'Hello world!'};
     }),
   user: publicProcedure
     .meta({
