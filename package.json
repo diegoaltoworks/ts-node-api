@@ -2,6 +2,7 @@
   "name": "ts-node-api",
   "version": "0.0.1",
   "main": "./dist/index.js",
+  "homepage": "https://ts-node-api-3s3qtcl6ra-ez.a.run.app",
   "scripts": {
     "stop": "pm2 stop all",
     "dev": "dotenvx run -- pm2-runtime start ecosystem.config.js --only dev",

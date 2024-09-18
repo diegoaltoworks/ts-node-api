@@ -19,7 +19,7 @@ const env = cleanEnv(process.env, {
   SENTRY_DSN: str({default: ''}),
   PORT: num({default: 3000}),
   APIKEY: str({default: ''}),
-  PROJECT_URL: str({default: ''}),
+  PROJECT_URL: str({default: PackageJson.homepage}),
   JWT_SECRET: str({default: '', devDefault: 'super-secret-goes-here'}),
   JWT_TEST_TOKEN: str({
     default: '',
