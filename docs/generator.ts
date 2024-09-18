@@ -21,7 +21,7 @@ const main = async () => {
     });
     await fetchOpenApiJson(
       `http://localhost:${PORT}/openapi.json`,
-      'openapi.json'
+      './docs/openapi.json'
     );
     server.close();
     console.info('DOCS.md generator: All done!');
