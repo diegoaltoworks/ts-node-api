@@ -4,6 +4,7 @@
 # explicitly define which files are copied
 !src/
 !index.ts
+!frontend/
 !tsconfig.json
 !tsconfig.build.json
 !package.json

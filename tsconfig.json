@@ -5,15 +5,17 @@
     "types": ["node", "vitest", "vitest/globals"],
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "declarationMap": true,
 
     "baseUrl": "./",
     "rootDir": ".",
     "outDir": "dist",
     "paths": {
-      "@/*": ["src/*"],
+      "@backend/*": ["backend/src/*"],
+      "@frontend/*": ["frontend/src/*"],
       "rollup/parseAst": ["./node_modules/rollup/dist/parseAst"]
     }
   },
-  "include": ["index.ts", "src/**/*.ts", "tests/**/*.ts"],
+  "include": ["backend/**/*.ts", "frontend/**/*.ts", "tests/**/*.ts"],
   "ignore": ["node_modules", "dist"]
 }

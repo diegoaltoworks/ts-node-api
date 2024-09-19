@@ -2,11 +2,11 @@ module.exports = {
   apps: [
     {
       name: 'dev',
-      script: 'src/index.ts',
+      script: 'backend/index.ts',
       interpreter: 'node',
       interpreterArgs: '--import tsx',
       watch: true,
-      ignore_watch: ['node_modules', 'dist', 'logs'],
+      ignore_watch: ['node_modules', 'dist', 'logs', 'frontend'],
       env: {
         NODE_ENV: 'development',
       },
@@ -18,7 +18,7 @@ module.exports = {
     },
     {
       name: 'prod',
-      script: 'dist/index.js',
+      script: 'dist/backend/index.js',
       interpreter: 'node',
       //exec_mode: 'cluster', // not suitable for cloud envs
       //instances: 9, // set maximum number of possible instances
