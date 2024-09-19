@@ -10,13 +10,14 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'json', 'html'], // output formats for the coverage reports
       all: true, // whether to include all files in the source map for coverage
-      include: ['src/**/*.{js,ts}'], // specify files to include for coverage
+      include: ['backend/**/*.{js,ts}', 'frontend/**/*.{js,ts}'], // specify files to include for coverage
       exclude: ['**/*.d.ts', 'tests/**/*'], // specify files to exclude from coverage
     },
   },
   resolve: {
     alias: {
-      '@': new URL('src', import.meta.url).pathname,
+      '@backend': new URL('backend/src', import.meta.url).pathname,
+      '@frontend': new URL('frontend/src', import.meta.url).pathname,
     },
   },
 });
