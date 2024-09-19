@@ -27,4 +27,4 @@ ENV PATH=/opt/node_app/node_modules/.bin:$PATH
 
 #ENTRYPOINT ["node","dist/index.js"]
 # distroless start command:
-CMD ["dist/index.js"]
+CMD ["dist/backend/index.js"]
