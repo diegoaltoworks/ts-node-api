@@ -1,5 +1,5 @@
 import {writeFileSync} from 'fs';
-import app from '../src/app';
+import app from '../backend/src/app';
 
 const PORT = 9000;
 
