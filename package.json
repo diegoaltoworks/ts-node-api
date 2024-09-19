@@ -1,7 +1,7 @@
 {
   "name": "ts-node-api",
   "version": "0.0.1",
-  "main": "./dist/index.js",
+  "main": "./dist/backend/index.js",
   "homepage": "https://ts-node-api.diegoalto.app",
   "scripts": {
     "stop": "pm2 stop all",
